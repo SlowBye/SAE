@@ -1,12 +1,12 @@
-stages:
-  - build
+# stages:
+#   - build
   # - test
   # - deploy
 
-build:
-  stage: build
-  script:
-    - docker build -t mon_application:latest .
+# build:
+#   stage: build
+#   script:
+#     - docker build -t mon_application:latest .
 
 # test:
 #   stage: test
