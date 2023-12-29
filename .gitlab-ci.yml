@@ -1,20 +1,19 @@
-# stages:
-#   - build
-  # - test
-  # - deploy
+stages:
+  - install
+  - start
+  - test
 
-# build:
-#   stage: build
-#   script:
-#     - docker build -t mon_application:latest .
+install_dependencies:
+  stage: install
+  script:
+    - npm install
 
-# test:
-#   stage: test
-#   script:
-#     - docker run mon_application:latest npm test
+start_app:
+  stage: start
+  script:
+    - npm run start
 
-# deploy:
-#   stage: deploy
-#   script:
-#     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-#     - docker push mon_application:latest
+run_tests:
+  stage: test
+  script:
+    - npm test

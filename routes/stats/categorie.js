@@ -29,11 +29,14 @@ router.get('/', async (req, res) => {
             .reduce((acc, [key, value]) => {
                 acc[key] = value;
                 return acc;
-            }, {});
-
+            },
+        {});
+        
+        res.setHeader('X-reponse', 'Reussi');
         res.status(201).json(sortedPourcentage);
     } catch (err) {
         console.log(err);
+        res.setHeader('X-reponse', 'Echec');
         res.status(500).send('Erreur lors de la récupération des données');
     }
 });

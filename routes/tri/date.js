@@ -29,12 +29,15 @@ router.get('/:date', async (req, res) => {
         });
 
         if (data.length === 0) {
+            res.setHeader('X-reponse', 'Echec');
             res.status(404).send('Aucun événement pour cette date');
         } else {
-            res.status(200).json(data);
+            res.setHeader('X-reponse', 'Reussi');
+            res.status(201).json(data);
         }
     } catch (err) {
         console.log(err);
+        res.setHeader('X-reponse', 'Echec');
         res.status(500).send('Erreur lors de la récupération des données');
     }
 });

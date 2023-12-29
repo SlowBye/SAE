@@ -37,15 +37,18 @@ router.get('/', async (req, res) => {
         });
 
         const sortedPourcentage = Object.entries(pourcentage)
-        .sort(([, a], [, b]) => b - a)
-        .reduce((acc, [key, value]) => {
-            acc[key] = value;
-            return acc;
-        }, {});
+            .sort(([, a], [, b]) => b - a)
+            .reduce((acc, [key, value]) => {
+                acc[key] = value;
+                return acc;
+            }, 
+        {});
 
+        res.setHeader('X-reponse', 'Reussi');
         res.status(201).json(sortedPourcentage);
     } catch (err) {
         console.log(err);
+        res.setHeader('X-reponse', 'Echec');
         res.status(500).send('Erreur lors de la récupération des données');
     }
 });
