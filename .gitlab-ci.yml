@@ -1,19 +1,16 @@
 stages:
-  - install
-  - start
+  - build
   - test
 
-install_dependencies:
-  stage: install
+build_image:
+  stage: build
+  image: docker:latest
+  services:
+    - docker:dind
   script:
-    - npm install
-
-start_app:
-  stage: start
-  script:
-    - npm run start
-
-run_tests:
-  stage: test
-  script:
-    - npm test
+    - docker build -t api .
+    - docker run -d -p 3000:3000 api npm start
+    - sleep 20
+    - docker exec $(docker ps -q) npm run test
+  after_script:
+    - docker stop $(docker ps -q)
