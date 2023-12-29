@@ -9,8 +9,8 @@ build_image:
     - docker:dind
   script:
     - docker build -t api .
-    - docker run -d -p 3000:3000 api npm start
+    - docker run -d -p 3000:3000 --name my_container api npm start
     - sleep 20
-    - docker exec $(docker ps -q) npm test
+    - docker exec my_container npm test
   after_script:
-    - docker stop $(docker ps -q)
+    - docker stop my_container
