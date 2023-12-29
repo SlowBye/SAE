@@ -11,6 +11,6 @@ build_image:
     - docker build -t api .
     - docker run -d -p 3000:3000 api npm start
     - sleep 20
-    - docker exec $(docker ps -q) npm run test
+    - docker exec $(docker ps -q) npm test
   after_script:
     - docker stop $(docker ps -q)
