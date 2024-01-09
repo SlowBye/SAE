@@ -8,6 +8,7 @@ build_image:
   services:
     - docker:dind
   script:
+    - docker rm -f sae || true  # Supprime le conteneur s'il existe, sinon ignore l'erreur
     - docker build -t api .
     - docker run -d -p 3000:3000 --name sae api npm start
     - sleep 20
