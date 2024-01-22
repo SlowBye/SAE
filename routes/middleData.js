@@ -7,10 +7,9 @@ const fetchData = async () => {
     if (process.env.NODE_ENV === 'test') {
       data = require('../jeu_de_test/test.json');
     } else {
-      const response = await fetch('https://mada.formation4f.com/php/index.php/Accueil');
+      const response = await fetch('https://mada.formation4f.com/php/Accueil.php');
       data = await response.json();
     }
-  
     return data;
 };
 
@@ -19,6 +18,7 @@ const middleData = async (req, res, next) => {
     try {
       const data = await fetchData();
       req.data = data;
+      console.log(data[0]['name']);
       next();
     } catch (error) {
       console.log(error);

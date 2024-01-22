@@ -4,18 +4,10 @@ const router = express.Router();
 
 router.get('/:epeires', async (req, res) => {
     try {
-        let liste = ["green", "yellow", "white"];
+        let regex = new RegExp(req.params.epeires, 'i');
+        let data = req.data.filter(item => regex.test(item.spider));
 
-        if (liste.includes(req.params.epeires)){
-            let epeires
-            for (let i = 0; i < liste.length; i++) {
-                if (req.params.epeires === liste[i]) {
-                    epeires = liste[i]
-                }
-            }
-
-            const data = req.data.filter(item => item.spider === epeires);
-
+        if (data.length > 0) {
             res.setHeader('X-reponse', 'Reussi');
             res.status(201).json(data);
         }

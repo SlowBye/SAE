@@ -6,20 +6,10 @@ router.get('/:etat', async (req, res) => {
     try {
         let liste = ["1", "2", "3", "4", "Cours","Attente", "Terminee", "Archivee"];
 
-        if (liste.includes(req.params.etat)){
-            let etat
-            for (let i = 0; i < liste.length; i++) {
-                if (req.params.etat === liste[i]) {
-                    if(i < 4) etat = liste[i]
-                    else if(i === 4) etat = liste[0]
-                    else if(i === 5) etat = liste[1]
-                    else if(i === 6) etat = liste[2]
-                    else if(i === 7) etat = liste[3]
-                    break
-                }
-            }
+        let regex = new RegExp(req.params.etat, 'i');
+        let data = req.data.filter(item => regex.test(item.niveau));
 
-            const data = req.data.filter(item => item.niveau === etat);
+        if(data.length > 0){
             res.setHeader('X-reponse', 'Reussi');
             res.status(201).json(data);
         }

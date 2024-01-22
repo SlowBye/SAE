@@ -7,7 +7,7 @@ cleanup_build:
   stage: cleanup
   image: docker:latest
   script:
-    - docker rm -f sae || true  # Supprime le conteneur s'il existe, sinon ignore l'erreur
+    - docker rm -f sae || true
 
 build_image:
   stage: build
