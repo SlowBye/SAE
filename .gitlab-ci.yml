@@ -15,7 +15,7 @@ build_image:
   services:
     - docker:dind
   script:
-    - docker build -t api
+    - docker build -t api .
 
 test_image:
   stage: test
@@ -28,6 +28,3 @@ test_image:
     - docker exec sae npm test
   after_script:
     - docker stop sae
-  artifacts:
-    paths:
-      - api.tar
