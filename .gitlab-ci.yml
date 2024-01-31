@@ -20,10 +20,11 @@ build_image:
   script:
     - apk --update add git
     - docker build -t api .
-    - ls
+    - ls -la
   artifacts:
     paths:
       - api.tar
+      - !.gitlab-ci.yml
 
 test_image:
   stage: test
