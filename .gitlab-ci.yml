@@ -4,15 +4,12 @@ stages:
   - prepare_artifact
   - test
   - debug
-  
+
 cleanup_build:
   stage: cleanup
   script:
-    - docker ps -a | grep "sae" || true
-    - docker inspect sae || true
     - docker rm -f sae || true
-    - rm -f sae.tar || true
-
+    - rm -f api.tar || true
 
 build_image:
   stage: build
@@ -22,13 +19,13 @@ build_image:
     - name: alpine/git
   script:
     - apk --update add git
-    - docker build -t sae .
+    - docker build -t api .
     - ls -la
 
 prepare_artifact:
   stage: prepare_artifact
   script:
-    - tar -cvf sae.tar .
+    - tar -cvf api.tar .
 
 test_image:
   stage: test
@@ -36,14 +33,14 @@ test_image:
   services:
     - docker:dind
   script:
-    - docker run -d -p 3000:3000 --name sae sae npm start
+    - docker run -d -p 3000:3000 --name sae api npm start
     - sleep 20
     - docker exec sae npm test
   after_script:
     - docker stop sae
   artifacts:
     paths:
-      - sae.tar
+      - api.tar
 
 debug:
   stage: debug
