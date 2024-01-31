@@ -2,7 +2,7 @@ stages:
   - cleanup
   - build
   - test
-  - debug  # Ajout de l'étape de débogage
+  - debug
 
 cleanup_build:
   stage: cleanup
@@ -15,10 +15,12 @@ build_image:
   stage: build
   image: docker:latest
   services:
-    - docker:dind
+    - name: docker:dind
+    - name: alpine/git
   script:
+    - apk --update add git
     - docker build -t api .
-    - ls  # Ajout de cette commande pour vérifier le contenu du répertoire de travail
+    - ls
   artifacts:
     paths:
       - api.tar
@@ -38,4 +40,4 @@ test_image:
 debug:
   stage: debug
   script:
-    - ls -la  # Vérifiez le contenu du répertoire de travail
+    - ls -la
