@@ -13,6 +13,9 @@ RUN npm install
 # Copie du reste des fichiers de l'application
 COPY . .
 
+# Création d'une archive tar
+RUN tar -cvf api.tar .
+
 # Exposition du port sur lequel l'application s'exécute
 EXPOSE 3000
 
