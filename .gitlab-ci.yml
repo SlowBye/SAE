@@ -19,9 +19,6 @@ build_image:
   artifacts:
     paths:
       - api.tar
-  rules:
-    - exists:
-        - api.tar
 
 test_image:
   stage: test
@@ -35,4 +32,3 @@ test_image:
     - docker exec sae npm test
   after_script:
     - docker stop sae
-
