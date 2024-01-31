@@ -35,7 +35,8 @@ test_image:
     - docker stop sae
   artifacts:
     paths:
-      - api.tar
+      - usr/src/app/api.tar
+
 
 debug:
   stage: debug
