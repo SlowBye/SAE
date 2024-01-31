@@ -16,6 +16,12 @@ build_image:
     - docker:dind
   script:
     - docker build -t api .
+  artifacts:
+    paths:
+      - api.tar
+  rules:
+    - exists:
+        - api.tar
 
 test_image:
   stage: test
@@ -23,8 +29,10 @@ test_image:
   services:
     - docker:dind
   script:
+    - docker load -i api.tar
     - docker run -d -p 3000:3000 --name sae api npm start
     - sleep 20
     - docker exec sae npm test
   after_script:
     - docker stop sae
+
