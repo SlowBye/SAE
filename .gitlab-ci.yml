@@ -24,7 +24,6 @@ build_image:
   artifacts:
     paths:
       - api.tar
-      - !.gitlab-ci.yml
 
 test_image:
   stage: test
