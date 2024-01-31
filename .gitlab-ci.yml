@@ -2,6 +2,7 @@ stages:
   - cleanup
   - build
   - test
+  - debug  # Ajout de l'étape de débogage
 
 cleanup_build:
   stage: cleanup
@@ -17,11 +18,10 @@ build_image:
     - docker:dind
   script:
     - docker build -t api .
-    - ls
+    - ls  # Ajout de cette commande pour vérifier le contenu du répertoire de travail
   artifacts:
     paths:
       - api.tar
-
 
 test_image:
   stage: test
@@ -34,3 +34,8 @@ test_image:
     - docker exec sae npm test
   after_script:
     - docker stop sae
+
+debug:
+  stage: debug
+  script:
+    - ls -la  # Vérifiez le contenu du répertoire de travail
