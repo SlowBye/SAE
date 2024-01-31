@@ -1,12 +1,12 @@
 stages:
   - cleanup
   - build
+  - prepare_artifact
   - test
   - debug
 
 cleanup_build:
   stage: cleanup
-  image: docker:latest
   script:
     - docker rm -f sae || true
     - rm -f api.tar || true
@@ -22,6 +22,11 @@ build_image:
     - docker build -t api .
     - ls -la
 
+prepare_artifact:
+  stage: prepare_artifact
+  script:
+    - tar -cvf api.tar .
+
 test_image:
   stage: test
   image: docker:latest
@@ -35,8 +40,7 @@ test_image:
     - docker stop sae
   artifacts:
     paths:
-      - usr/src/app/api.tar
-
+      - api.tar
 
 debug:
   stage: debug
