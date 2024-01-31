@@ -4,12 +4,15 @@ stages:
   - prepare_artifact
   - test
   - debug
-
+  
 cleanup_build:
   stage: cleanup
   script:
+    - docker ps -a | grep "sae" || true
+    - docker inspect sae || true
     - docker rm -f sae || true
     - rm -f sae.tar || true
+
 
 build_image:
   stage: build
