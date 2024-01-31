@@ -16,6 +16,9 @@ build_image:
     - docker:dind
   script:
     - docker build -t api .
+  artifacts:
+    paths:
+      - api.tar
 
 test_image:
   stage: test
