@@ -14,14 +14,18 @@ const app = express();
 
 app.use(Middle);
 
-app.use('/', Menu);
-app.use('/stats/categorie', statCategorie);
-app.use('/stats/etat', statEtat);
-app.use('/stats/epeires', statEpeires);
+app.use(Menu);
 
+app.use('/stat/categorie', statCategorie);
 app.use('/tri/categorie', triCategorie);
-app.use('/tri/epeires', triEpeires);
+
+app.use('/stat/etat', statEtat);
 app.use('/tri/etat', triEtat);
+
+app.use('/stat/epeires', statEpeires);
+app.use('/tri/epeires', triEpeires);
+
+
 app.use('/tri/nom', triNom);
 app.use('/tri/date', triDate);
 

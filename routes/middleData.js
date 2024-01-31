@@ -18,7 +18,6 @@ const middleData = async (req, res, next) => {
     try {
       const data = await fetchData();
       req.data = data;
-      console.log(data[0]['name']);
       next();
     } catch (error) {
       console.log(error);
