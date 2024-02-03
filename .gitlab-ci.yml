@@ -41,9 +41,6 @@ test_image:
     - docker exec $CONTAINER_NAME npm test
   after_script:
     - docker stop $CONTAINER_NAME
-  artifacts:
-    paths:
-      - api.tar
 
 
 debug:
