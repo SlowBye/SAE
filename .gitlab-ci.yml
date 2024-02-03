@@ -25,7 +25,6 @@ build_image:
 prepare_artifact:
   stage: prepare_artifact
   script:
-    - cd /usr/src/app
     - tar -cvf api.tar .
 
 test_image:
