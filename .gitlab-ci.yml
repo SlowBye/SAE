@@ -9,7 +9,7 @@ cleanup_build:
   stage: cleanup
   script:
     - docker rm -f sae || true
-    - docker rmi -f api:$CI_COMMIT_REF_NAME || true
+    - docker rm -f api || true
 
 build_image:
   stage: build
@@ -19,10 +19,7 @@ build_image:
     - name: alpine/git
   script:
     - apk --update add git
-    - docker build -t api:$CI_COMMIT_REF_NAME .
-    - docker tag api:$CI_COMMIT_REF_NAME api:latest  # Tag supplémentaire pour "latest"
-  only:
-    - master  # Cela dépend de votre stratégie de déploiement
+    - docker build -t api .
 
 prepare_artifact:
   stage: prepare_artifact
@@ -39,7 +36,7 @@ test_image:
     - docker:dind
   script:
     - CONTAINER_NAME="sae-$CI_JOB_ID"
-    - docker run -d -p 3000:3000 --name $CONTAINER_NAME api:$CI_COMMIT_REF_NAME npm start
+    - docker run -d -p 3000:3000 --name $CONTAINER_NAME api npm start
     - sleep 20
     - docker exec $CONTAINER_NAME npm test
   after_script:
