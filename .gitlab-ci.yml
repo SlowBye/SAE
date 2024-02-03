@@ -24,7 +24,10 @@ build_image:
 prepare_artifact:
   stage: prepare_artifact
   script:
-    - tar -cvf api.tar .
+    - tar -cvf /builds/m20003727/sae_s5/api.tar .
+  artifacts:
+    paths:
+      - api.tar
 
 test_image:
   stage: test
