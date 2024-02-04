@@ -1,32 +1,27 @@
 stages:
   - cleanup
   - build
-  - prepare_artifact
   - test
   - debug
 
 cleanup_build:
   stage: cleanup
+  image: docker:latest
   script:
-    - docker stop $(docker ps -a -q) || true
-    - docker container prune -f
+    - docker rm -f sae || true
     - rm -f api.tar || true
 
 build_image:
   stage: build
   image: docker:latest
   services:
-    - name: docker:dind
-    - name: alpine/git
+    - docker:dind
   script:
-    - apk --update add git
     - docker build -t api .
     - ls -la
-
-prepare_artifact:
-  stage: prepare_artifact
-  script:
-    - tar -cvf api.tar .
+  artifacts:
+    paths:
+      - api.tar
 
 test_image:
   stage: test
@@ -34,16 +29,11 @@ test_image:
   services:
     - docker:dind
   script:
-    - docker ps -q --filter "name=sae" | xargs -r docker stop
     - docker run -d -p 3000:3000 --name sae api npm start
     - sleep 20
     - docker exec sae npm test
   after_script:
-    - docker stop sae || true
-  artifacts:
-    paths:
-      - api.tar
-
+    - docker stop sae
 
 debug:
   stage: debug
