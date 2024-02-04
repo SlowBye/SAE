@@ -8,7 +8,7 @@ stages:
 cleanup_build:
   stage: cleanup
   script:
-    - docker rm -f sae || true
+    - docker container prune -f
     - rm -f api.tar || true
 
 build_image:
