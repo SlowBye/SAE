@@ -9,7 +9,7 @@ cleanup_build:
   stage: cleanup
   script:
     - docker rm -f sae || true
-    - docker rm -f api || true
+    - rm -f api.tar || true
 
 build_image:
   stage: build
@@ -20,14 +20,12 @@ build_image:
   script:
     - apk --update add git
     - docker build -t api .
+    - ls -la
 
 prepare_artifact:
   stage: prepare_artifact
   script:
-    - tar -cvf /builds/m20003727/sae_s5/api.tar .
-  artifacts:
-    paths:
-      - api.tar
+    - tar -cvf api.tar .
 
 test_image:
   stage: test
@@ -35,16 +33,14 @@ test_image:
   services:
     - docker:dind
   script:
-    - CONTAINER_NAME="sae-$CI_JOB_ID"  # Utilisation de CI_JOB_ID pour générer un nom unique
-    - docker run -d -p 3000:3000 --name $CONTAINER_NAME api npm start
+    - docker run -d -p 3000:3000 --name sae api npm start
     - sleep 20
-    - docker exec $CONTAINER_NAME npm test
+    - docker exec sae npm test
   after_script:
-    - docker stop $CONTAINER_NAME
+    - docker stop sae
   artifacts:
     paths:
       - api.tar
-
 
 debug:
   stage: debug
