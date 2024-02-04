@@ -8,6 +8,7 @@ stages:
 cleanup_build:
   stage: cleanup
   script:
+    - docker stop $(docker ps -a -q) || true
     - docker container prune -f
     - rm -f api.tar || true
 
