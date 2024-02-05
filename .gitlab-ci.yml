@@ -19,6 +19,9 @@ build_image:
   script:
     - docker build -t api .
     - ls -la
+  artifacts:
+    paths:
+      - api.tar
 
 test_image:
   stage: test
