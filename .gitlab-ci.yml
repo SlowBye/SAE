@@ -1,6 +1,7 @@
 stages:
   - cleanup
   - build
+  - artefacts
   - test
   - debug
 
@@ -21,6 +22,15 @@ build_image:
     - ls -la
   artifacts:
     paths:
+      - api.tar
+
+Artefacts:
+  stage: artefacts
+  script:
+    - tar -cvf api.tar api
+  artifacts:
+    paths:
+      - ls -la
       - api.tar
 
 test_image:
