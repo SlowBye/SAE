@@ -1,7 +1,6 @@
 stages:
   - cleanup
   - build
-  - artefacts
   - test
   - debug
 
@@ -20,18 +19,6 @@ build_image:
   script:
     - docker build -t api .
     - ls -la
-  artifacts:
-    paths:
-      - api.tar
-
-Artefacts:
-  stage: artefacts
-  script:
-    - tar -cvf api.tar api
-  artifacts:
-    paths:
-      - ls -la
-      - api.tar
 
 test_image:
   stage: test
