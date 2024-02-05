@@ -8,7 +8,6 @@ cleanup_build:
   stage: cleanup
   image: docker:latest
   script:
-    - docker stop $(docker ps -a -q)
     - docker container prune -f
     - rm -f api.tar || true
 
