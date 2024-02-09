@@ -1,6 +1,15 @@
 import fetch from 'node-fetch';
 
+/**
+ * Middleware pour récupérer les données.
+ * @module Middle
+ */
 
+/**
+ * Fonction asynchrone pour récupérer les données en fonction de l'environnement.
+ * @async
+ * @returns {Promise<Object>} Les données récupérées.
+ */
 const fetchData = async () => {
     let data;
   
@@ -13,7 +22,14 @@ const fetchData = async () => {
     return data;
 };
 
-  
+/**
+ * Middleware pour récupérer les données et les attacher à la requête.
+ * @async
+ * @param {string} req - L'objet de requête Express.
+ * @param {string} res - L'objet de réponse Express.
+ * @param {string} next - La fonction pour passer au middleware suivant.
+ * @returns {void}
+ */
 const middleData = async (req, res, next) => {
     try {
       const data = await fetchData();

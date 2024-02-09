@@ -2,6 +2,17 @@ import express from 'express';
 
 const router = express.Router();
 
+/**
+ * Route GET pour récupérer les statistiques par catégorie.
+ * @module statCategorie
+ * @name GET /stat/categorie
+ * @function
+ * @memberof module:statCategorie
+ * @param {Object} req - L'objet de requête Express.
+ * @param {Object} res - L'objet de réponse Express.
+ * @returns {void} - Renvoie un objet JSON contenant les statistiques par catégorie et un header X-reponse personalisé.
+ * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
+ */
 router.get('/', async (req, res) => {
     try {
         const categories = {};

@@ -2,6 +2,18 @@ import express from 'express';
 
 const router = express.Router();
 
+/**
+ * Route GET pour récupérer les éléments triés par nom.
+ * @module triNom
+ * @name GET /tri/nom/:nom
+ * @function
+ * @memberof module:triNom
+ * @param {Object} req - L'objet de requête Express.
+ * @param {string} req.params.nom - Le paramètre de l'URL contenant le nom à filtrer.
+ * @param {Object} res - L'objet de réponse Express.
+ * @returns {void} - Renvoie un objet JSON contenant les éléments triés par nom et un header X-reponse personalisé.
+ * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
+ */
 router.get('/:nom', async (req, res) => {
     try {
         const nom = req.params.nom.toLowerCase();

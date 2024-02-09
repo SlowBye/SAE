@@ -2,6 +2,18 @@ import express from 'express';
 
 const router = express.Router();
 
+/**
+ * Route GET pour récupérer les statistiques d'epeires.
+ * @module statEpeires
+ * @name GET /stat/epeires
+ * @function
+ * @memberof module:statEpeires
+ * @param {Object} req - L'objet de requête Express.
+ * @param {Object} res - L'objet de réponse Express.
+ * @returns {void} - Renvoie un objet JSON contenant les statistiques d'epeires et un header X-reponse personalisé.
+ * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
+ */
+
 router.get('/', async (req, res) => {
     try {
         const spiders = {};

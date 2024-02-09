@@ -2,11 +2,12 @@
   "type": "module",
   "name": "sae_s5",
   "version": "1.0.0",
-  "description": "",
+  "description": "Projet SAE S5",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "npx jest"
+    "test": "npx jest",
+    "doc": "jsdoc -r ./routes ./index.js -d ./docs"
   },
   "author": "David Morais Pereira",
   "license": "ISC",
@@ -14,6 +15,7 @@
     "@mui/material": "^5.15.6",
     "@mui/styled-engine-sc": "^6.0.0-alpha.13",
     "axios": "^1.6.3",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "node-fetch": "^3.3.2",
     "styled-components": "^6.1.8"
@@ -26,5 +28,14 @@
     "jsdom": "^23.0.1",
     "nodemon": "^3.0.2",
     "supertest": "^6.3.3"
-  }
+  },
+  "keywords": ["SAE", "S5", "Projet", "JavaScript"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/votreutilisateur/votrerepo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/votreutilisateur/votrerepo/issues"
+  },
+  "homepage": "https://github.com/votreutilisateur/votrerepo#readme"
 }

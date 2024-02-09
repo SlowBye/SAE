@@ -11,7 +11,7 @@
     - Express : Utilisé pour développer le service web en JavaScript.
     - MySQL : Base de données utilisée pour stocker les données récupérées par le service web.
     - CI-CD : Méthode d'intégration continue et de déploiement continu pour garantir la qualité du code avant le déploiement.
-    - PedaWeb : Déploiement sur PedaWeb uniquement après des tests réussis via CI-CD.
+    - PedaWeb : Déploiement sur PedaWeb uniquement après des tests réussis via CI-CD. //impossible car pedaweb ne marche pas avec du javascript
 
 ## Fonctionnalités :
 

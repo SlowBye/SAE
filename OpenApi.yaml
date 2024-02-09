@@ -1,0 +1,113 @@
+openapi: 3.0.3
+info:
+  title: API Mada
+  description: Une API de statistiques et tri de données de l'application MADA de la DGAC
+  version: 1.0.11
+servers:
+  - url: http://localhost:3000
+paths:
+  /:
+    get:
+      summary: Affiche un menu qui permet de naviguer facilement entre les différentes routes
+      responses:
+        '201':
+          description: Succès
+  /stat/categorie:
+    get:
+      summary: Fait une statistique sur les catégories
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /stat/etat:
+    get:
+      summary: Fait une statistique sur les états
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /stat/epeires:
+    get:
+      summary: Fait une statistique sur les événements envoyés ou non sur EPEIRES
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /tri/categorie/{categorie}:
+    get:
+      summary: Trie les événements par catégorie
+      parameters:
+        - name: categorie
+          in: path
+          description: Nom de la catégorie pour trier les événements
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /tri/etat/{etat}:
+    get:
+      summary: Trie les événements par état
+      parameters:
+        - name: etat
+          in: path
+          description: Nom de l'état pour trier les événements
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /tri/epeires/{epeires}:
+    get:
+      summary: Trie les événements par EPEIRES
+      parameters:
+        - name: epeires
+          in: path
+          description: Valeur EPEIRES pour trier les événements
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /tri/nom/{nom}:
+    get:
+      summary: Trie les événements par nom
+      parameters:
+        - name: nom
+          in: path
+          description: Nom de l'événement pour trier les événements
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée
+  /tri/date/{date}:
+    get:
+      summary: Trie les événements par date
+      parameters:
+        - name: date
+          in: path
+          description: Date de l'événement pour trier les événements (format = YYYY-MM-DD)
+          required: true
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Succès
+        '500':
+          description: Donnée non récupérée

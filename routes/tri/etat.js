@@ -2,6 +2,18 @@ import express from 'express';
 
 const router = express.Router();
 
+/**
+ * Route GET pour récupérer les éléments triés d'état.
+ * @module triEtat
+ * @name GET /tri/etat/:etat
+ * @function
+ * @memberof module:triEtat
+ * @param {Object} req - L'objet de requête Express.
+ * @param {string} req.params.etat - Le paramètre de l'URL contenant l'état à filtrer.
+ * @param {Object} res - L'objet de réponse Express.
+ * @returns {void} - Renvoie un objet JSON contenant les éléments triés d'état et un header X-reponse personalisé.
+ * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
+ */
 router.get('/:etat', async (req, res) => {
     try {
         let liste = ["1", "2", "3", "4", "Cours","Attente", "Terminee", "Archivee"];

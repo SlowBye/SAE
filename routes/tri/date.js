@@ -2,6 +2,18 @@ import express from 'express';
 
 const router = express.Router();
 
+/**
+ * Route GET pour récupérer les éléments triés par date.
+ * @module triDate
+ * @name GET /tri/date/:date
+ * @function
+ * @memberof module:triDate
+ * @param {Object} req - L'objet de requête Express.
+ * @param {string} req.params.date - Le paramètre de l'URL contenant la date à filtrer.
+ * @param {Object} res - L'objet de réponse Express.
+ * @returns {void} - Renvoie un objet JSON contenant les éléments triés par date et un header X-reponse personalisé.
+ * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
+ */
 router.get('/:date', async (req, res) => {
     try {
         const requestedDate = new Date(req.params.date);
