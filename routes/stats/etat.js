@@ -5,7 +5,7 @@ const router = express.Router();
 /**
  * Route GET pour récupérer les statistiques d'état.
  * @module statEtat
- * @name GET /stat/etat
+ * @name GET /stat/etat/:year?
  * @function
  * @memberof module:statEtat
  * @param {Object} req - L'objet de requête Express.
@@ -14,8 +14,19 @@ const router = express.Router();
  * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
  */
 
-router.get('/', async (req, res) => {
+router.get('/:year?', async (req, res) => {
     try {
+        const { year } = req.params; // Récupérer l'année depuis les paramètres de route
+
+        let filteredData = req.data;
+
+        if (year) {
+            filteredData = req.data.filter(item => {
+                const itemYear = new Date(item.date).getFullYear(); // Obtenir l'année de l'élément
+                return itemYear.toString() === year.toString(); // Filtrer les éléments avec l'année spécifiée
+            });
+        }
+
         const labels = {
             '1': 'En attente',
             '2': 'En cours',
@@ -26,7 +37,7 @@ router.get('/', async (req, res) => {
         const level = {};
         let totalCount = 0;
 
-        req.data.forEach(item => {
+        filteredData.forEach(item => {
             const niveau = item.niveau;
             if (!level[niveau]) {
                 level[niveau] = 1;

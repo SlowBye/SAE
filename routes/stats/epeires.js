@@ -5,7 +5,7 @@ const router = express.Router();
 /**
  * Route GET pour récupérer les statistiques d'epeires.
  * @module statEpeires
- * @name GET /stat/epeires
+ * @name GET /stat/epeires/:year?
  * @function
  * @memberof module:statEpeires
  * @param {Object} req - L'objet de requête Express.
@@ -14,12 +14,23 @@ const router = express.Router();
  * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
  */
 
-router.get('/', async (req, res) => {
+router.get('/:year?', async (req, res) => {
     try {
+        const { year } = req.params; // Récupérer l'année depuis les paramètres de route
+
+        let filteredData = req.data;
+
+        if (year) {
+            filteredData = req.data.filter(item => {
+                const itemYear = new Date(item.date).getFullYear(); // Obtenir l'année de l'élément
+                return itemYear.toString() === year.toString(); // Filtrer les éléments avec l'année spécifiée
+            });
+        }
+
         const spiders = {};
         let total = 0;
 
-        req.data.forEach(item => {
+        filteredData.forEach(item => {
             const spider = item.spider;
             if (!spiders[spider]) {
                 spiders[spider] = 1;

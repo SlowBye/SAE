@@ -5,7 +5,7 @@ const router = express.Router();
 /**
  * Route GET pour récupérer les statistiques par catégorie.
  * @module statCategorie
- * @name GET /stat/categorie
+ * @name GET /stat/categorie/:year?
  * @function
  * @memberof module:statCategorie
  * @param {Object} req - L'objet de requête Express.
@@ -13,12 +13,23 @@ const router = express.Router();
  * @returns {void} - Renvoie un objet JSON contenant les statistiques par catégorie et un header X-reponse personalisé.
  * @throws {Error} - Renvoie une erreur si la récupération des données échoue.
  */
-router.get('/', async (req, res) => {
+router.get('/:year?', async (req, res) => {
     try {
+        const { year } = req.params; // Récupérer l'année depuis les paramètres de route
+
+        let filteredData = req.data;
+
+        if (year) {
+            filteredData = req.data.filter(item => {
+                const itemYear = new Date(item.date).getFullYear();
+                return itemYear.toString() === year.toString();
+            });
+        }
+
         const categories = {};
         let totalCount = 0;
 
-        req.data.forEach(item => {
+        filteredData.forEach(item => {
             const category = item.category;
             if (!categories[category]) {
                 categories[category] = 1;
